@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mistério das Giras - Pombagiras</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a15 0%, #1a0a2e 50%, #0f0a1a 100%);
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Lato', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Orbs Background */
+        .orbs-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a15 0%, #1a0a2e 50%, #0f0a1a 100%);
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            mix-blend-mode: screen;
+        }
+
+        .orb-red {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(220, 20, 60, 0.8) 0%, rgba(220, 20, 60, 0) 70%);
+            top: -100px;
+            right: -100px;
+            animation: float-red 15s ease-in-out infinite;
+        }
+
+        .orb-blue {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(30, 144, 255, 0.8) 0%, rgba(30, 144, 255, 0) 70%);
+            bottom: 50px;
+            left: 10%;
+            animation: float-blue 18s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+
+        .orb-green {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(34, 139, 34, 0.7) 0%, rgba(34, 139, 34, 0) 70%);
+            top: 50%;
+            left: -150px;
+            animation: float-green 20s ease-in-out infinite;
+            animation-delay: 4s;
+        }
+
+        .orb-yellow {
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.7) 0%, rgba(255, 215, 0, 0) 70%);
+            bottom: 20%;
+            right: 5%;
+            animation: float-yellow 17s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+
+        .orb-purple {
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.7) 0%, rgba(147, 51, 234, 0) 70%);
+            top: 30%;
+            right: 20%;
+            animation: float-purple 19s ease-in-out infinite;
+            animation-delay: 3s;
+        }
+
+        @keyframes float-red {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(50px, -80px); }
+            50% { transform: translate(-30px, -50px); }
+            75% { transform: translate(80px, 40px); }
+        }
+
+        @keyframes float-blue {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-60px, 40px); }
+            50% { transform: translate(40px, 80px); }
+            75% { transform: translate(-40px, -30px); }
+        }
+
+        @keyframes float-green {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(80px, -60px); }
+            50% { transform: translate(-50px, 40px); }
+            75% { transform: translate(60px, 70px); }
+        }
+
+        @keyframes float-yellow {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-50px, 50px); }
+            50% { transform: translate(70px, -40px); }
+            75% { transform: translate(-30px, -70px); }
+        }
+
+        @keyframes float-purple {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(40px, 60px); }
+            50% { transform: translate(-70px, -30px); }
+            75% { transform: translate(50px, -50px); }
+        }
+
+        .stars-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(10, 10, 21, 0.95) 0%, rgba(26, 10, 46, 0.95) 50%, rgba(15, 10, 26, 0.95) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            position: relative;
+            z-index: 3;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Social Buttons Container */
+        .social-buttons-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 200, 100, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 200, 100, 0.2);
+            border-color: rgba(255, 200, 100, 0.6);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 200, 100, 0.4);
+        }
+
+        .social-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: rgba(255, 200, 100, 0.9);
+            transition: fill 0.3s ease;
+        }
+
+        .social-btn:hover svg {
+            fill: rgba(255, 255, 255, 1);
+        }
+
+        /* Estilo aprimorado para a imagem hero */
+        .hero-image-container {
+            position: relative;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 
+                0 0 60px rgba(255, 200, 100, 0.3),
+                0 0 100px rgba(147, 51, 234, 0.2),
+                inset 0 0 40px rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 200, 100, 0.2);
+            transform: perspective(1000px) rotateX(2deg);
+            transition: all 0.5s ease;
+        }
+
+        .hero-image-container:hover {
+            transform: perspective(1000px) rotateX(0deg);
+            box-shadow: 
+                0 0 80px rgba(255, 200, 100, 0.4),
+                0 0 120px rgba(147, 51, 234, 0.3),
+                inset 0 0 50px rgba(255, 255, 255, 0.15);
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: brightness(1.05) contrast(1.1) saturate(1.2);
+            transition: filter 0.5s ease;
+        }
+
+        .hero-image-container:hover img {
+            filter: brightness(1.1) contrast(1.15) saturate(1.3);
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin: 0 0 1rem 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 200, 100, 0.8) 50%, rgba(255, 255, 255, 0.95) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 200, 100, 0.3);
+            filter: drop-shadow(0 0 20px rgba(255, 200, 100, 0.2));
+        }
+
+        .hero-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: rgba(255, 200, 100, 0.9);
+            letter-spacing: 0.1em;
+            margin: 0 0 2rem 0;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .hero-description {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin: 0 0 3rem 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 200, 100, 0.8), transparent);
+            margin: 0 auto;
+            animation: expandWidth 1s ease-out 0.5s both;
+        }
+
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 100px; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer Advertência */
+        .footer-warning {
+            background: linear-gradient(135deg, rgba(10, 10, 21, 0.98) 0%, rgba(26, 10, 46, 0.98) 50%, rgba(15, 10, 26, 0.98) 100%);
+            border-top: 2px solid rgba(220, 20, 60, 0.4);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-warning::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(220, 20, 60, 0.8), rgba(147, 51, 234, 0.8), rgba(220, 20, 60, 0.8), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .warning-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+            animation: pulse-warning 2s infinite;
+        }
+
+        @keyframes pulse-warning {
+            0%, 100% { 
+                text-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 25px rgba(220, 20, 60, 0.8), 0 0 40px rgba(147, 51, 234, 0.5);
+                transform: scale(1.1);
+            }
+        }
+
+        .warning-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            color: rgba(255, 200, 100, 0.95);
+            max-width: 900px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.8;
+            font-style: italic;
+            text-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
+        }
+
+        .warning-signature {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: rgba(220, 20, 60, 0.8);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .footer-divider {
+            width: 150px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(220, 20, 60, 0.6), transparent);
+            margin: 1.5rem auto;
+        }
+
+        .footer-credits {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 1rem;
+        }
+
+        /* Tables Layout */
+        .tables-section {
+            padding: 4rem 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .tables-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 1200px) {
+            .tables-container {
+                grid-template-columns: 1fr;
+                gap: 6rem;
+            }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.95);
+            margin: 0 0 1rem 0;
+            letter-spacing: 0.05em;
+        }
+
+        .section-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            color: rgba(255, 200, 100, 0.8);
+            margin: 0;
+            letter-spacing: 0.05em;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Card Styles */
+        .card-wrapper {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            perspective: 1000px;
+        }
+
+        .card-wrapper:hover {
+            transform: translateY(-10px);
+            filter: drop-shadow(0 10px 30px rgba(255, 200, 100, 0.3));
+        }
+
+        .pombagira-card {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform-style: preserve-3d;
+        }
+
+        .pombagira-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        .card-border-outer {
+            width: 95%;
+            height: 95%;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(20, 10, 30, 0.9) 100%);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1), inset 0 0 30px rgba(255, 255, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-border-inner {
+            width: 98%;
+            height: 98%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: absolute;
+            top: 1%;
+            left: 1%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 1.5rem;
+            position: relative;
+        }
+
+        .card-top-ornament, .card-bottom-ornament {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ornament-diamond {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .card-image-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+            opacity: 0.95;
+            transition: opacity 0.3s ease;
+        }
+
+        .card-image-wrapper:hover .card-image {
+            opacity: 1;
+        }
+
+        .card-text-section {
+            text-align: center;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .card-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.95);
+            letter-spacing: 0.05em;
+            margin: 0;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            line-height: 1.2;
+        }
+
+        .card-attribute {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(255, 200, 100, 0.8);
+            letter-spacing: 0.1em;
+            margin: 0.5rem 0 0 0;
+            text-transform: uppercase;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 480px) {
+            .card-name {
+                font-size: 1.5rem;
+            }
+            
+            .card-attribute {
+                font-size: 0.8rem;
+                line-height: 1.2;
+            }
+
+            .social-btn {
+                width: 40px;
+                height: 40px;
+            }
+
+            .social-btn svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        /* Back Card */
+        .card-back-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+        }
+
+        .back-section {
+            text-align: center;
+            margin: 0.5rem 0;
+        }
+
+        .back-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: rgba(255, 200, 100, 0.9);
+            letter-spacing: 0.05em;
+            margin: 0 0 0.5rem 0;
+            text-transform: uppercase;
+        }
+
+        .back-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .colors-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .color-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(255, 200, 100, 0.15);
+            border: 1px solid rgba(255, 200, 100, 0.4);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: rgba(255, 200, 100, 0.9);
+            font-weight: 600;
+        }
+
+        /* Detail Section */
+        .detail-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(10, 10, 21, 0.98) 0%, rgba(26, 10, 46, 0.98) 50%, rgba(15, 10, 26, 0.98) 100%);
+            border-top: 2px solid rgba(255, 200, 100, 0.3);
+            border-bottom: 2px solid rgba(255, 200, 100, 0.3);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .detail-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .close-button {
+            position: absolute;
+            top: -2rem;
+            right: 0;
+            background: none;
+            border: none;
+            color: rgba(255, 200, 100, 0.8);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+            z-index: 10;
+        }
+
+        .close-button:hover {
+            color: rgba(255, 200, 100, 1);
+        }
+
+        .detail-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .detail-image {
+            position: sticky;
+            top: 2rem;
+        }
+
+        .detail-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(255, 200, 100, 0.2);
+            border: 2px solid rgba(255, 200, 100, 0.3);
+        }
+
+        .detail-info {
+            overflow-y: auto;
+            max-height: 80vh;
+            padding-right: 1rem;
+        }
+
+        .detail-info::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .detail-info::-webkit-scrollbar-track {
+            background: rgba(255, 200, 100, 0.1);
+            border-radius: 10px;
+        }
+
+        .detail-info::-webkit-scrollbar-thumb {
+            background: rgba(255, 200, 100, 0.4);
+            border-radius: 10px;
+        }
+
+        .detail-info::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 200, 100, 0.6);
+        }
+
+        .detail-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.95);
+            margin: 0 0 0.5rem 0;
+            letter-spacing: 0.05em;
+        }
+
+        .detail-attribute {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            color: rgba(255, 200, 100, 0.9);
+            letter-spacing: 0.1em;
+            margin: 0 0 2rem 0;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .detail-section-block {
+            margin-bottom: 2rem;
+        }
+
+        .detail-section-block h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: rgba(255, 200, 100, 0.9);
+            margin: 0 0 0.8rem 0;
+            letter-spacing: 0.05em;
+        }
+
+        .detail-section-block p {
+            font-family: 'Lato', sans-serif;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .colors-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .color-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(255, 200, 100, 0.15);
+            border: 1px solid rgba(255, 200, 100, 0.4);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: rgba(255, 200, 100, 0.9);
+            font-weight: 600;
+        }
+
+        .offerings-list, .locais-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .offerings-list li, .locais-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .offerings-list li::before, .locais-list li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: rgba(255, 200, 100, 0.6);
+        }
+
+        /* Rare Badge - Estilo RARÍSSIMA */
+        .rare-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.9) 0%, rgba(102, 0, 204, 0.9) 100%);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+            text-transform: uppercase;
+        }
+
+        /* Estilo especial para RARÍSSIMA */
+        .ultra-rare-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, 
+                rgba(220, 20, 60, 0.9) 0%, 
+                rgba(147, 51, 234, 0.9) 50%, 
+                rgba(30, 144, 255, 0.9) 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            z-index: 2;
+            box-shadow: 
+                0 0 25px rgba(220, 20, 60, 0.6),
+                0 0 15px rgba(147, 51, 234, 0.4),
+                0 0 5px rgba(30, 144, 255, 0.3);
+            text-transform: uppercase;
+            animation: pulse-ultra-rare 2s infinite;
+        }
+
+        @keyframes pulse-ultra-rare {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 25px rgba(220, 20, 60, 0.6),
+                    0 0 15px rgba(147, 51, 234, 0.4),
+                    0 0 5px rgba(30, 144, 255, 0.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 35px rgba(220, 20, 60, 0.8),
+                    0 0 25px rgba(147, 51, 234, 0.6),
+                    0 0 15px rgba(30, 144, 255, 0.5);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .detail-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .detail-image {
+                position: relative;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="orbs-background">
+        <div class="orb orb-red"></div>
+        <div class="orb orb-blue"></div>
+        <div class="orb orb-green"></div>
+        <div class="orb orb-yellow"></div>
+        <div class="orb orb-purple"></div>
+        <div class="stars-container" id="starsContainer"></div>
+    </div>
+
+    <div class="container">
+        <section class="hero-section">
+            <div class="hero-content">
+                <!-- Social Buttons -->
+                <div class="social-buttons-container">
+                    <!-- Botão Esquerdo - Redes Sociais -->
+                    <a href="https://alexialuzdeferro.github.io/melusine_redes/" target="_blank" class="social-btn" title="Redes Sociais">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                            <line x1="12" y1="18" x2="12" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    
+                    <!-- Botão Direito - Bio/Site -->
+                    <a href="https://bio.site/AlmasdePombagira" target="_blank" class="social-btn" title="Site">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="hero-image-container">
+                    <img src="https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/hero_pombagira.png" alt="Hero Pombagira">
+                </div>
+                <h1 class="hero-title">Mistério das Giras</h1>
+                <h2 class="hero-subtitle">Pombagiras Conhecidas e Raras</h2>
+                <p class="hero-description">Explore o mundo místico das Pombagiras, entidades poderosas da Umbanda e Quimbanda. Conheça as Pombagiras tradicionais e descubra as entidades raras, cada uma com suas características únicas e poderes especiais.</p>
+                <div class="hero-divider"></div>
+            </div>
+        </section>
+
+        <section class="tables-section">
+            <div class="tables-container">
+                <!-- Primeira Coluna: Pombagiras -->
+                <div class="pombagira-table">
+                    <header class="section-header">
+                        <h2 class="section-title">AS POMBAGIRAS</h2>
+                        <p class="section-subtitle">Entidades tradicionais e conhecidas</p>
+                    </header>
+                    <div class="cards-grid" id="pombagiraCardsGrid"></div>
+                </div>
+
+                <!-- Segunda Coluna: Pombagiras Raras -->
+                <div class="rare-table">
+                    <header class="section-header">
+                        <h2 class="section-title">POMBAGIRAS RARAS</h2>
+                        <p class="section-subtitle">Entidades menos conhecidas e especiais</p>
+                    </header>
+                    <div class="cards-grid" id="rareCardsGrid"></div>
+                </div>
+            </div>
+        </section>
+
+        <div id="detailSection"></div>
+
+        <!-- Footer com Advertência -->
+        <footer class="footer-warning">
+            <span class="warning-icon">🌹⚔️🌹</span>
+            <p class="warning-text">
+                "Não brinque com o que não conhece, criatura. Nós vemos além dos véus, sentimos cada intenção que pulsa no seu coração. 
+                Quem nos procura por vaidade, colhe espinhos. Quem vem com respeito, encontra a rosa. 
+                A encruzilhada não perdoa os tolos — ela apenas os devolve ao próprio abismo."
+            </p>
+            <div class="footer-divider"></div>
+            <p class="warning-signature">— As Pombagiras</p>
+            <p class="footer-credits">Mistério das Giras © 2026 — Com respeito às tradições ancestrais</p>
+        </footer>
+    </div>
+
+    <script>
+        // Dados das Pombagiras
+        const pombagiras = [
+            {
+                "id": "maria-padilha",
+                "name": "Maria Padilha",
+                "attribute": "Comando/Realeza",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/maria_padilha.png",
+                "day": "Sexta-feira",
+                "moonPhase": "Lua cheia",
+                "colors": ["Vermelho", "Dourado", "Preto"],
+                "offerings": ["Champanhe", "Rosas vermelhas", "Joias", "Velas douradas", "Perfumes caros", "Maços de cigarro"],
+                "description": "Maria Padilha é uma das Pombagiras mais conhecidas e reverenciadas, associada à realeza, ao comando e à sedução. Dizem que ela foi uma rainha ou nobre em vida, e sua energia é de poder, liderança e controle. É invocada para questões de autoridade, justiça e também para abrir caminhos em situações de dificuldade. Seu sincretismo é frequentemente ligado à figura de Maria Madalena ou à Rainha do Sabá. Curiosamente, seu nome pode ter origem em uma lenda portuguesa sobre uma mulher de grande influência e beleza.",
+                "signos": ["Leão", "Escorpião"],
+                "locais": ["Encruzilhadas limpas", "Altares decorados com luxo", "Espelhos"],
+                "simbolismo": ["Coroa", "Cetro", "Espelho", "Rosas vermelhas"],
+                "utensílios": ["Espada", "Espelho", "Taça de cristal"]
+            },
+            {
+                "id": "maria-mulambo",
+                "name": "Maria Mulambo",
+                "attribute": "Cura/Humildade",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/maria_mulambo.png",
+                "day": "Segunda-feira ou quarta-feira",
+                "moonPhase": "Lua minguante",
+                "colors": ["Branco", "Verde-claro", "Cinza"],
+                "offerings": ["Velas brancas", "Flores do campo", "Água de cheiro", "Pão", "Mel", "Ervas medicinais"],
+                "description": "Maria Mulambo é a Pombagira da cura e da humildade, muitas vezes representada como uma mulher simples, vestida de trapos, mas com um coração puro e cheio de compaixão. Ela atua na cura de doenças físicas e espirituais, especialmente aquelas ligadas à pobreza e ao abandono. É uma entidade que ensina a importância da simplicidade e da resiliência. Dizem que ela gosta de oferendas simples, como velas brancas e flores do campo.",
+                "signos": ["Virgem", "Câncer"],
+                "locais": ["Encruzilhadas simples", "Portas de hospitais", "Locais de caridade"],
+                "simbolismo": ["Trapos limpos", "Vasos de barro", "Ervas"],
+                "utensílios": ["Cesto de vime", "Moringa com água", "Panos brancos"]
+            },
+            {
+                "id": "maria-quiteria",
+                "name": "Maria Quitéria",
+                "attribute": "Guerra/Proteção",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/maria_quiteria.png",
+                "day": "Terça-feira",
+                "moonPhase": "Lua crescente",
+                "colors": ["Vermelho", "Marrom", "Preto"],
+                "offerings": ["Velas vermelhas", "Espadas ou facas", "Cerveja preta", "Pimenta", "Comidas apimentadas"],
+                "description": "Maria Quitéria é uma guerreira, associada à proteção e à luta. Seu nome faz referência à heroína brasileira Joana Angélica e à guerreira Quitéria, que lutou na Independência da Bahia. Ela é invocada para proteger contra inimigos, tanto físicos quanto espirituais, e para dar força em batalhas pessoais. Sua energia é de coragem e determinação, e ela é frequentemente representada com uma espada ou armadura.",
+                "signos": ["Áries", "Escorpião"],
+                "locais": ["Encruzilhadas de estradas movimentadas", "Campos de batalha simbólicos"],
+                "simbolismo": ["Espada", "Escudo", "Armadura", "Bandeira"],
+                "utensílios": ["Espada", "Facão", "Bandeira vermelha"]
+            },
+            {
+                "id": "rosa-caveira",
+                "name": "Rosa Caveira",
+                "attribute": "Justiça/Morte",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/rosa_caveira.png",
+                "day": "Sábado",
+                "moonPhase": "Lua nova ou lua cheia",
+                "colors": ["Preto", "Vermelho-sangue", "Roxo"],
+                "offerings": ["Velas pretas", "Rosas vermelhas e pretas", "Vinho tinto", "Ossos", "Moedas"],
+                "description": "Rosa Caveira é uma entidade poderosa, ligada à justiça e ao ciclo da vida e da morte. Seu nome evoca a imagem de uma caveira com uma rosa, simbolizando a beleza e a transitoriedade da existência. Ela é invocada para questões de justiça, especialmente quando há injustiças a serem reparadas. Também é associada à transformação e ao renascimento espiritual. Sua energia é intensa e não deve ser invocada sem preparo.",
+                "signos": ["Escorpião", "Plutão"],
+                "locais": ["Cemitérios", "Encruzilhadas escuras"],
+                "simbolismo": ["Caveira", "Rosa", "Balança", "Foice"],
+                "utensílios": ["Foice", "Espelho preto", "Rosário de ossos"]
+            },
+            {
+                "id": "dama-noite",
+                "name": "Dama da Noite",
+                "attribute": "Mistério/Oculto",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/dama_noite.png",
+                "day": "Sexta-feira (noite)",
+                "moonPhase": "Lua negra",
+                "colors": ["Preto", "Roxo", "Azul-escuro"],
+                "offerings": ["Velas pretas", "Flores noturnas", "Vinho", "Incenso de mirra", "Objetos prateados"],
+                "description": "A Dama da Noite é a senhora dos segredos e do oculto. Ela rege os mistérios da noite, da magia e do desconhecido. É uma entidade que ajuda a desvendar verdades escondidas e a proteger segredos. Seu nome remete à flor que desabrocha apenas à noite, simbolizando sua conexão com o invisível. É uma Pombagira que exige respeito e discricionamento, pois seu conhecimento é profundo e perigoso para os imprudentes.",
+                "signos": ["Escorpião", "Peixes"],
+                "locais": ["Locais escuros", "Florestas à noite", "Altares cobertos"],
+                "simbolismo": ["Lua crescente", "Olho", "Chave", "Morcego"],
+                "utensílios": ["Chave", "Espelho negro", "Livro de segredos"]
+            },
+            {
+                "id": "sete-saias",
+                "name": "Sete Saias",
+                "attribute": "Alegria/Intensidade",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/sete_saias.png",
+                "day": "Quinta-feira ou domingo",
+                "moonPhase": "Lua crescente ou cheia",
+                "colors": ["Vermelho", "Rosa", "Amarelo", "Multicolorido"],
+                "offerings": ["Doces", "Frutas", "Velas coloridas", "Tecidos", "Música", "Dança"],
+                "description": "Sete Saias é a Pombagira da alegria, da dança e da intensidade da vida. Seu nome faz referência às sete saias coloridas que ela usa, cada uma representando uma energia ou um aspecto da vida. Ela é invocada para trazer alegria, movimento e paixão. Também é associada à fertilidade e à abundância. Sua dança é contagiante, e sua presença traz um clima de festa e celebração.",
+                "signos": ["Sagitário", "Leão"],
+                "locais": ["Praças", "Festas", "Encruzilhadas alegres"],
+                "simbolismo": ["Saias coloridas", "Tambor", "Máscara"],
+                "utensílios": ["Tambor", "Leque", "Fitas coloridas"]
+            },
+            {
+                "id": "cigana",
+                "name": "Pombagira Cigana",
+                "attribute": "Liberdade/Prosperidade",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/cigana.png",
+                "day": "Quarta-feira",
+                "moonPhase": "Lua cheia",
+                "colors": ["Vermelho", "Dourado", "Verde"],
+                "offerings": ["Moedas", "Joias", "Cartas de baralho", "Velas douradas", "Vinho doce"],
+                "description": "A Pombagira Cigana é a senhora da liberdade e da prosperidade. Ela é associada aos povos ciganos, à magia das cartas e à vida nômade. Invocada para questões de independência, viagens e prosperidade material, ela também ajuda a desatar nós e a trazer sorte. Seu sincretismo pode ser ligado a Santa Sara Kali, a padroeira dos ciganos. Gosta de oferendas como moedas, fitas coloridas e objetos brilhantes.",
+                "signos": ["Sagitário", "Touro"],
+                "locais": ["Estradas", "Acampamentos", "Feiras"],
+                "simbolismo": ["Carruagem", "Cartas", "Cristais", "Rodas"],
+                "utensílios": ["Baralho cigano", "Sinos", "Moedas"]
+            },
+            {
+                "id": "maria-navalha",
+                "name": "Maria Navalha",
+                "attribute": "Malandragem/Rua",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/maria_navalha.png",
+                "day": "Terça-feira ou sexta-feira à noite",
+                "moonPhase": "Lua minguante",
+                "colors": ["Preto", "Vermelho", "Prata"],
+                "offerings": ["Facas ou navalhas", "Cerveja", "Cigarro", "Dinheiro"],
+                "description": "Maria Navalha é a Pombagira da malandragem, da rua e da sobrevivência. Seu nome evoca a navalha, símbolo de proteção e de justiça nas mãos daqueles que precisam se defender. Ela é invocada para questões de proteção em ambientes perigosos, para afugentar maus elementos e para dar astúcia. É uma entidade que entende a vida nas ruas e a luta diária.",
+                "signos": ["Escorpião", "Gêmeos"],
+                "locais": ["Ruas movimentadas", "Becos", "Encruzilhadas urbanas"],
+                "simbolismo": ["Navalha", "Chave", "Carta de baralho"],
+                "utensílios": ["Navalha", "Dado", "Lenço vermelho"]
+            },
+            {
+                "id": "praia",
+                "name": "Pombagira da Praia",
+                "attribute": "Emoção/Limpeza",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/praia.png",
+                "day": "Quinta-feira ou segunda-feira",
+                "moonPhase": "Lua cheia ou crescente",
+                "colors": ["Azul", "Branco", "Prata"],
+                "offerings": ["Água do mar", "Conchas", "Velas azuis", "Flores brancas", "Perfumes suaves"],
+                "description": "A Pombagira da Praia é a senhora das águas, das emoções e da limpeza espiritual. Ela atua na purificação, na renovação e no equilíbrio emocional. É invocada para limpar energias negativas, para trazer calma e para trabalhar questões ligadas ao coração e às lágrimas. Sua energia é refrescante e acolhedora, como o mar.",
+                "signos": ["Câncer", "Peixes"],
+                "locais": ["Praias", "Margens de rios", "Banheiros"],
+                "simbolismo": ["Concha", "Onda", "Pérola", "Rede"],
+                "utensílios": ["Concha", "Jarro com água do mar", "Leque"]
+            },
+            {
+                "id": "maria-farrapo",
+                "name": "Maria Farrapo",
+                "attribute": "Sanidade/Caos Mental",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/maria_farrapo.png",
+                "day": "Segunda-feira",
+                "moonPhase": "Lua minguante",
+                "colors": ["Branco sujo", "Cinza", "Lilás"],
+                "offerings": ["Velas brancas", "Ervas calmantes", "Água com sal", "Pano branco"],
+                "description": "Maria Farrapo é a Pombagira que lida com a sanidade e o caos mental. Seu nome 'farrapo' remete a trapos, simbolizando a desordem e a necessidade de reconstrução. Ela é invocada para ajudar em questões de saúde mental, para acalmar mentes perturbadas e para trazer clareza em momentos de confusão. Sua energia é de transformação e de cura profunda.",
+                "signos": ["Virgem", "Peixes"],
+                "locais": ["Hospitais psiquiátricos", "Encruzilhadas silenciosas"],
+                "simbolismo": ["Pano rasgado", "Nó", "Labirinto"],
+                "utensílios": ["Pano branco", "Cordão com nós", "Incenso de lavanda"]
+            },
+            {
+                "id": "menina",
+                "name": "Pombagira Menina",
+                "attribute": "Renovação/Inocência",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/menina.png",
+                "day": "Domingo",
+                "moonPhase": "Lua nova",
+                "colors": ["Rosa", "Branco", "Azul-claro"],
+                "offerings": ["Doces", "Brinquedos", "Balas", "Velas rosas", "Flores brancas"],
+                "description": "A Pombagira Menina representa a renovação, a inocência e o recomeço. Ela é a energia da criança, da pureza e da esperança. Invocada para trazer leveza, para renovar energias e para proteger crianças e projetos novos. Sua presença é doce, mas não deve ser subestimada, pois ela carrega a sabedoria daqueles que renascem.",
+                "signos": ["Áries", "Libra"],
+                "locais": ["Parques", "Escolas", "Encruzilhadas limpas"],
+                "simbolismo": ["Boneca", "Flor", "Borboleta", "Sino"],
+                "utensílios": ["Boneca", "Sino", "Balão"]
+            },
+            {
+                "id": "figueira",
+                "name": "Pombagira da Figueira",
+                "attribute": "Raiz/Ancestralidade",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/figueira.png",
+                "day": "Sábado",
+                "moonPhase": "Lua minguante",
+                "colors": ["Marrom", "Verde-escuro", "Preto"],
+                "offerings": ["Folhas de figueira", "Velas verdes", "Terra", "Sementes", "Mel"],
+                "description": "A Pombagira da Figueira é a guardiã das raízes, da ancestralidade e da conexão com a terra. Ela é invocada para fortalecer laços familiares, para honrar os ancestrais e para trazer estabilidade. A figueira é um símbolo de resistência e de ligação com o passado. Sua energia é de solidez e de respeito às tradições.",
+                "signos": ["Touro", "Capricórnio"],
+                "locais": ["Pé de figueira", "Florestas", "Encruzilhadas rurais"],
+                "simbolismo": ["Raízes", "Árvore", "Semente", "Vasos de barro"],
+                "utensílios": ["Vaso de barro", "Sementes", "Enxada"]
+            }
+        ];
+
+        const rarePombagiras = [
+            {
+                "id": "almas",
+                "name": "Pombagira das Almas",
+                "attribute": "Luz/Transição",
+                "attributeFormatted": "Luz<br>Transição",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/Pombagira%20das%20Almas.jpeg",
+                "day": "Segunda-feira",
+                "moonPhase": "Lua crescente",
+                "colors": ["Branco", "Prata", "Azul-celeste"],
+                "offerings": ["Velas brancas", "Água pura", "Flores brancas", "Incenso de mirra", "Orações"],
+                "description": "A Pombagira das Almas é uma entidade rara que trabalha com a luz e a transição das almas. Ela atua como uma guia espiritual, ajudando as almas em seu processo de passagem para o outro plano. É invocada para proteção espiritual, para ajudar entes queridos que partiram e para trabalhos de elevação espiritual. Sua energia é suave, porém poderosa, trazendo conforto e esclarecimento em momentos de perda.",
+                "signos": ["Câncer", "Peixes"],
+                "locais": ["Cemitérios ao amanhecer", "Capelas", "Altares simples"],
+                "simbolismo": ["Luz", "Asas", "Cálice", "Círculo"],
+                "utensílios": ["Cálice de prata", "Vela branca", "Incensário"]
+            },
+            {
+                "id": "sete-encruzilhadas",
+                "name": "Pombagira Sete Encruzilhadas",
+                "attribute": "Destino/Caminhos",
+                "attributeFormatted": "Destino<br>Caminhos",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/Pombagira%20das%20Sete%20Encruzilhada.jpeg",
+                "day": "Sexta-feira",
+                "moonPhase": "Lua cheia",
+                "colors": ["Vermelho", "Preto", "Dourado"],
+                "offerings": ["Velas vermelhas e pretas", "Charutos", "Rum", "Moedas antigas", "Chaves"],
+                "description": "A Pombagira Sete Encruzilhadas é a senhora dos destinos e dos caminhos que se cruzam. Cada uma das sete encruzilhadas representa uma escolha, um destino possível. Ela é invocada para abrir caminhos, tomar decisões difíceis e desfazer nós kármicos. É uma entidade que compreende a complexidade da vida e as múltiplas possibilidades que se apresentam a cada momento.",
+                "signos": ["Gêmeos", "Sagitário"],
+                "locais": ["Encruzilhadas de sete ruas", "Estradas antigas", "Cruzamentos"],
+                "simbolismo": ["Cruzamentos", "Estradas", "Bússola", "Mapa"],
+                "utensílios": ["Bússola", "Sete chaves", "Mapa antigo"]
+            },
+            {
+                "id": "lua",
+                "name": "Pombagira da Lua",
+                "attribute": "Intuição/Mistério",
+                "attributeFormatted": "Intuição<br>Mistério",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/Pombagira%20da%20Lua.jpeg",
+                "day": "Segunda-feira",
+                "moonPhase": "Todas as fases",
+                "colors": ["Prata", "Branco", "Azul-prateado"],
+                "offerings": ["Velas prateadas", "Água da chuva", "Cristais de quartzo", "Flores noturnas", "Poções"],
+                "description": "A Pombagira da Lua é a guardiã dos mistérios lunares e da intuição feminina. Ela rege os ciclos, as marés emocionais e os segredos da noite. É invocada para trabalhos de intuição, sonhos proféticos, cura emocional e magia lunar. Sua energia muda conforme as fases da lua, sendo mais intensa na lua cheia e mais introspectiva na lua nova.",
+                "signos": ["Câncer", "Escorpião", "Peixes"],
+                "locais": ["Clareiras à luz da lua", "Lagos noturnos", "Mirantes"],
+                "simbolismo": ["Lua crescente", "Água", "Cristal", "Espelho de prata"],
+                "utensílios": ["Espelho prateado", "Cálice de prata", "Sinete lunar"]
+            },
+            {
+                "id": "trevas",
+                "name": "Pombagira das Trevas",
+                "attribute": "Conhecimento/Transformação",
+                "attributeFormatted": "Conhecimento<br>Transformação",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/Pombagira%20das%20Trevas.jpeg",
+                "day": "Sábado",
+                "moonPhase": "Lua nova",
+                "colors": ["Preto", "Roxo-escuro", "Cinza"],
+                "offerings": ["Velas pretas", "Incenso de sálvia", "Vinho tinto", "Livros antigos", "Penhas"],
+                "description": "A Pombagira das Trevas não representa o mal, mas sim o conhecimento oculto e a transformação que ocorre nas profundezas. Ela é a guardiã dos segredos mais profundos da alma e do universo. Invocada para trabalhos de autoconhecimento, superação de medos e transformação radical. Sua energia é intensa e requer preparo espiritual.",
+                "signos": ["Escorpião", "Capricórnio"],
+                "locais": ["Cavernas", "Florestas densas", "Locais abandonados à noite"],
+                "simbolismo": ["Livro fechado", "Chave negra", "Portal", "Coruja"],
+                "utensílios": ["Livro negro", "Chave de ferro", "Cajado escuro"]
+            },
+            {
+                "id": "serra",
+                "name": "Pombagira da Serra",
+                "attribute": "Força/Estabilidade",
+                "attributeFormatted": "Força<br>Estabilidade",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/Pombagira%20da%20Serra.jpeg",
+                "day": "Quinta-feira",
+                "moonPhase": "Lua crescente",
+                "colors": ["Verde", "Marrom", "Cinza"],
+                "offerings": ["Pedras da serra", "Ervas do campo", "Mel silvestre", "Cachaça", "Frutas da estação"],
+                "description": "A Pombagira da Serra é a senhora das montanhas e da terra firme. Ela representa a força, a estabilidade e a resistência. É invocada para proteção do lar, firmeza em decisões, conexão com a natureza e trabalhos de enraizamento. Sua energia é sólida como a rocha, oferecendo apoio inabalável nos momentos difíceis.",
+                "signos": ["Touro", "Capricórnio", "Virgem"],
+                "locais": ["Montanhas", "Serras", "Pedreiras", "Campos altos"],
+                "simbolismo": ["Montanha", "Raízes", "Rocha", "Águia"],
+                "utensílios": ["Cajado de madeira", "Pedra da serra", "Vaso de barro"]
+            },
+            {
+                "id": "fogo",
+                "name": "Pombagira do Fogo",
+                "attribute": "Paixão/Transformação",
+                "attributeFormatted": "Paixão<br>Transformação",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/Pombagira%20do%20Fogo.jpeg",
+                "day": "Terça-feira",
+                "moonPhase": "Lua cheia",
+                "colors": ["Vermelho", "Laranja", "Amarelo", "Dourado"],
+                "offerings": ["Velas vermelhas", "Pimentas", "Cachaça ardente", "Carvão", "Incenso de canela"],
+                "description": "A Pombagira do Fogo é a senhora das paixões ardentes e da transformação pelo fogo. Ela queima o velho para dar lugar ao novo, transforma a energia e acende a chama da vontade. É invocada para paixões, coragem, iniciativa e proteção contra energias negativas. Sua energia é quente, intensa e purificadora.",
+                "signos": ["Áries", "Leão", "Sagitário"],
+                "locais": ["Lareiras", "Fogueiras", "Forjas", "Vulcões (simbólicos)"],
+                "simbolismo": ["Chama", "Espada flamejante", "Fênix", "Sol"],
+                "utensílios": ["Tocha", "Espada de fogo", "Braseiro"]
+            },
+            {
+                "id": "aguas-profundas",
+                "name": "Pombagira das Águas Profundas",
+                "attribute": "Emoções/Inconsciente",
+                "attributeFormatted": "Emoções<br>Inconsciente",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/Pombagira%20das%20Aguas%20Profunda.jpeg",
+                "day": "Segunda-feira",
+                "moonPhase": "Lua cheia",
+                "colors": ["Azul-marinho", "Verde-água", "Prata"],
+                "offerings": ["Água do mar", "Conchas", "Velas azuis", "Perfumes aquáticos", "Pedras aquáticas"],
+                "description": "A Pombagira das Águas Profundas rege as emoções mais profundas, o inconsciente coletivo e os segredos do oceano. Ela é invocada para trabalhos emocionais, cura de traumas, intuição profunda e conexão com o mundo onírico. Sua energia é calma na superfície, mas poderosa nas profundezas.",
+                "signos": ["Câncer", "Escorpião", "Peixes"],
+                "locais": ["Oceanos", "Lagos profundos", "Grutas marinhas", "Fontes naturais"],
+                "simbolismo": ["Onda", "Concha", "Sereia", "Âncora"],
+                "utensílios": ["Concha grande", "Rede", "Âncora pequena"]
+            },
+            {
+                "id": "sombra",
+                "name": "Pombagira das Sombras",
+                "attribute": "Proteção/Anonimato",
+                "attributeFormatted": "Proteção<br>Anonimato",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/Pombagira%20das%20Sombras.jpeg",
+                "day": "Sexta-feira à noite",
+                "moonPhase": "Lua minguante",
+                "colors": ["Preto", "Cinza-escuro", "Roxo"],
+                "offerings": ["Velas pretas", "Incenso de patchouli", "Vinho seco", "Chaves velhas", "Tecidos escuros"],
+                "description": "A Pombagira das Sombras é a guardiã do anonimato e da proteção nas sombras. Ela ensina a arte da discrição, protege segredos e oferece abrigo nos momentos de vulnerabilidade. É invocada para proteção contra olho gordo, para trabalhos discretos e para afastar inimigos ocultos.",
+                "signos": ["Escorpião", "Capricórnio", "Aquário"],
+                "locais": ["Becos escuros", "Portais sombrios", "Encruzilhadas noturnas"],
+                "simbolismo": ["Sombra", "Véu", "Portal oculto", "Morcego"],
+                "utensílios": ["Véu negro", "Chave antiga", "Cajado escuro"]
+            },
+            {
+                "id": "calunga-profunda",
+                "name": "Pombagira da Calunga Profunda",
+                "attribute": "Morte/Regeneração",
+                "attributeFormatted": "Morte<br>Regeneração",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/pombagira_calunga_profunda.png",
+                "day": "Segunda-feira",
+                "moonPhase": "Lua nova",
+                "colors": ["Preto", "Branco", "Prata", "Roxo"],
+                "offerings": ["Água do mar", "Conchas negras", "Velas pretas e brancas", "Flores brancas", "Incenso de mirra"],
+                "description": "A Pombagira da Calunga Profunda é a guardiã dos portais entre a vida e a morte. Calunga, na cultura afro-brasileira, representa o mar e o cemitério - os dois grandes mistérios. Ela trabalha com a regeneração espiritual, ajudando nos processos de morte e renascimento simbólicos. É invocada para superar perdas profundas, transformar dores em sabedoria e acessar conhecimentos ancestrais. Sua energia é profunda e contemplativa, exigindo respeito absoluto.",
+                "signos": ["Escorpião", "Peixes", "Capricórnio"],
+                "locais": ["Praias desertas à noite", "Encruzilhadas de cemitérios", "Penhascos à beira-mar"],
+                "simbolismo": ["Âncora", "Concha negra", "Espelho d'água", "Portão"],
+                "utensílios": ["Âncora pequena", "Espelho negro", "Cálice de prata"],
+                "ultraRare": true
+            },
+            {
+                "id": "correntes",
+                "name": "Pombagira das Correntes",
+                "attribute": "Libertação/Vínculos",
+                "attributeFormatted": "Libertação<br>Vínculos",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/pombagira_correntes.png",
+                "day": "Quarta-feira",
+                "moonPhase": "Lua crescente",
+                "colors": ["Prateado", "Branco", "Azul-celeste", "Cinza"],
+                "offerings": ["Cadeados abertos", "Chaves", "Velas prateadas", "Água corrente", "Fitas brancas"],
+                "description": "A Pombagira das Correntes é a especialista em romper vínculos negativos e libertar aqueles que estão presos em situações opressoras. Ela trabalha com a quebra de amarras energéticas, contratos kármicos e relacionamentos tóxicos. É invocada para obter liberdade emocional, financeira ou espiritual. Sua energia é cortante e precisa, como uma tesoura que corta os fios invisíveis que nos prendem. Dizem que ela carrega um feixe de chaves que abre qualquer cadeado espiritual.",
+                "signos": ["Aquário", "Gêmeos", "Libra"],
+                "locais": ["Ponte sobre rios", "Portões de ferro", "Encruzilhadas com estátuas"],
+                "simbolismo": ["Corrente quebrada", "Chave", "Tesoura", "Asas"],
+                "utensílios": ["Feixe de chaves", "Tesoura de prata", "Corrente partida"],
+                "ultraRare": true
+            },
+            {
+                "id": "neblina",
+                "name": "Pombagira da Neblina",
+                "attribute": "Ilusão/Verdade",
+                "attributeFormatted": "Ilusão<br>Verdade",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/pombagira_neblina.png",
+                "day": "Sexta-feira",
+                "moonPhase": "Lua cheia",
+                "colors": ["Cinza-perolado", "Branco-fumê", "Azul-claro", "Prata"],
+                "offerings": ["Névoa de incenso", "Velas branco-fumê", "Água com essência", "Cristais de quartzo", "Espelhos pequenos"],
+                "description": "A Pombagira da Neblina é a senhora das aparências e das verdades ocultas. Ela trabalha com o véu da ilusão, podendo tanto esconder quanto revelar. É invocada para proteção através do ocultamento, para desvendar mentiras ou para trabalhos que requerem discrição absoluta. Sua energia é etérea e mutável, como a névoa que se dissipa ao amanhecer. Ela ensina que nem tudo o que é visível é real, e nem tudo o que é real é visível.",
+                "signos": ["Peixes", "Câncer", "Escorpião"],
+                "locais": ["Florestas com neblina", "Montanhas ao amanhecer", "Lagos enevoados", "Ruínas"],
+                "simbolismo": ["Véu", "Espelho embaçado", "Névoa", "Farol"],
+                "utensílios": ["Véu cinza", "Lanterna de névoa", "Espelho circular"],
+                "ultraRare": true
+            },
+            {
+                "id": "fenda",
+                "name": "Pombagira da Fenda",
+                "attribute": "Transição/Limiar",
+                "attributeFormatted": "Transição<br>Limiar",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/pombagira_fenda.png",
+                "day": "Sábado",
+                "moonPhase": "Lua minguante",
+                "colors": ["Roxo-escuro", "Preto", "Dourado", "Vermelho-sangue"],
+                "offerings": ["Pedras pontiagudas", "Velas roxas", "Vinho tinto", "Espadas pequenas", "Chaves antigas"],
+                "description": "A Pombagira da Fenda é a guardiã dos espaços entre os mundos. Ela habita as fendas da realidade, os momentos de transição e os limiares entre estados de consciência. É invocada para acessar realidades paralelas, para trabalhos de viagem astral ou para atravessar períodos de crise profunda. Sua energia é intensa e um tanto perturbadora, pois ela vive nas bordas do conhecido. Dizem que seu nome vem das fendas nas rochas onde se acreditava que os mundos se tocavam.",
+                "signos": ["Escorpião", "Aquário", "Capricórnio"],
+                "locais": ["Rachaduras em rochas", "Portais antigos", "Encruzilhadas em abismos", "Túneis"],
+                "simbolismo": ["Fenda", "Portal", "Ponte estreita", "Abismo"],
+                "utensílios": ["Pedra fissurada", "Chave serrilhada", "Ponte em miniatura"],
+                "ultraRare": true
+            }
+        ];
+
+        function createStars() {
+            const starsContainer = document.getElementById('starsContainer');
+            for (let i = 0; i < 30; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (2 + Math.random() * 2) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        function createCard(pombagira, isRare = false) {
+            const cardWrapper = document.createElement('div');
+            cardWrapper.className = 'card-wrapper';
+            cardWrapper.setAttribute('data-id', pombagira.id);
+            cardWrapper.onclick = () => showDetails(pombagira.id, isRare);
+
+            const card = document.createElement('div');
+            card.className = 'pombagira-card';
+
+            const front = document.createElement('div');
+            front.className = 'card-front';
+            
+            const attributeText = pombagira.attributeFormatted || pombagira.attribute;
+            
+            const badgeClass = pombagira.ultraRare ? 'ultra-rare-badge' : 'rare-badge';
+            const badgeText = pombagira.ultraRare ? 'RARÍSSIMA' : 'RARA';
+            
+            let frontHTML = `
+                <div class="card-border-outer">
+                    <div class="card-border-inner">
+                        <div class="card-content">
+                            ${isRare ? `<div class="${badgeClass}">${badgeText}</div>` : ''}
+                            <div class="card-top-ornament">
+                                <span class="ornament-diamond">◆</span>
+                            </div>
+                            <div class="card-image-wrapper">
+                                <img src="${pombagira.image}" alt="${pombagira.name}" class="card-image">
+                            </div>
+                            <div class="card-text-section">
+                                <h3 class="card-name">${pombagira.name}</h3>
+                                <p class="card-attribute">${attributeText}</p>
+                            </div>
+                            <div class="card-bottom-ornament">
+                                <span class="ornament-diamond">◆</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            front.innerHTML = frontHTML;
+
+            const back = document.createElement('div');
+            back.className = 'card-back';
+            back.innerHTML = `
+                <div class="card-border-outer">
+                    <div class="card-border-inner">
+                        <div class="card-back-content">
+                            <div class="back-section">
+                                <h4 class="back-label">Dia</h4>
+                                <p class="back-value">${pombagira.day}</p>
+                            </div>
+                            <div class="back-section">
+                                <h4 class="back-label">Fase Lunar</h4>
+                                <p class="back-value">${pombagira.moonPhase}</p>
+                            </div>
+                            <div class="back-section">
+                                <h4 class="back-label">Cores</h4>
+                                <div class="colors-display">
+                                    ${pombagira.colors.map(color => `<span class="color-tag">${color}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="back-section">
+                                <h4 class="back-label">Oferendas</h4>
+                                <p class="back-value">${pombagira.offerings.slice(0, 3).join(', ')}...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            card.appendChild(front);
+            card.appendChild(back);
+            cardWrapper.appendChild(card);
+            return cardWrapper;
+        }
+
+        function renderCards() {
+            const pombagiraCardsGrid = document.getElementById('pombagiraCardsGrid');
+            pombagiraCardsGrid.innerHTML = '';
+
+            pombagiras.forEach(pombagira => {
+                const card = createCard(pombagira, false);
+                pombagiraCardsGrid.appendChild(card);
+            });
+
+            const rareCardsGrid = document.getElementById('rareCardsGrid');
+            rareCardsGrid.innerHTML = '';
+
+            rarePombagiras.forEach(pombagira => {
+                const card = createCard(pombagira, true);
+                rareCardsGrid.appendChild(card);
+            });
+        }
+
+        function showDetails(id, isRare = false) {
+            const pombagira = isRare ? 
+                rarePombagiras.find(p => p.id === id) : 
+                pombagiras.find(p => p.id === id);
+            
+            if (!pombagira) return;
+
+            const detailSection = document.getElementById('detailSection');
+            detailSection.innerHTML = `
+                <section class="detail-section">
+                    <div class="detail-container">
+                        <button class="close-button" onclick="closeDetails()">✕</button>
+                        <div class="detail-content">
+                            <div class="detail-image">
+                                <img src="${pombagira.image}" alt="${pombagira.name}">
+                                ${isRare ? `<div class="${pombagira.ultraRare ? 'ultra-rare-badge' : 'rare-badge'}" style="position: absolute; top: 20px; right: 20px;">${pombagira.ultraRare ? 'ENTIDADE RARÍSSIMA' : 'ENTIDADE RARA'}</div>` : ''}
+                            </div>
+                            <div class="detail-info">
+                                <h2 class="detail-name">${pombagira.name}</h2>
+                                <p class="detail-attribute">${pombagira.attribute}</p>
+                                <div class="detail-section-block">
+                                    <h3>Descrição</h3>
+                                    <p>${pombagira.description}</p>
+                                </div>
+                                <div class="detail-grid">
+                                    <div class="detail-section-block">
+                                        <h3>Dia de Reverência</h3>
+                                        <p>${pombagira.day}</p>
+                                    </div>
+                                    <div class="detail-section-block">
+                                        <h3>Fase Lunar</h3>
+                                        <p>${pombagira.moonPhase}</p>
+                                    </div>
+                                    <div class="detail-section-block">
+                                        <h3>Cores</h3>
+                                        <div class="colors-list">
+                                            ${pombagira.colors.map(color => `<span class="color-badge">${color}</span>`).join('')}
+                                        </div>
+                                    </div>
+                                    <div class="detail-section-block">
+                                        <h3>Signos Associados</h3>
+                                        <p>${pombagira.signos.join(', ')}</p>
+                                    </div>
+                                </div>
+                                <div class="detail-section-block">
+                                    <h3>Oferendas</h3>
+                                    <ul class="offerings-list">
+                                        ${pombagira.offerings.map(offering => `<li>${offering}</li>`).join('')}
+                                    </ul>
+                                </div>
+                                <div class="detail-section-block">
+                                    <h3>Locais de Oferenda</h3>
+                                    <ul class="locais-list">
+                                        ${pombagira.locais.map(local => `<li>${local}</li>`).join('')}
+                                    </ul>
+                                </div>
+                                <div class="detail-section-block">
+                                    <h3>Simbolismo</h3>
+                                    <p>${pombagira.simbolismo.join(', ')}</p>
+                                </div>
+                                <div class="detail-section-block">
+                                    <h3>Utensílios</h3>
+                                    <p>${pombagira.utensílios.join(', ')}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `;
+
+            detailSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeDetails() {
+            document.getElementById('detailSection').innerHTML = '';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            renderCards();
+        });
+    </script>
+</body>
+</html>
