@@ -4,7 +4,7 @@
 
 ## 🌙 Sobre o Projeto
 
-**Mistério das Giras** é um compêndio digital dedicado às Pombagiras e Exús da Umbanda e Quimbanda. Um espaço onde o conhecimento ancestral encontra a tecnologia moderna, preservando o respeito pelas entidades e suas tradições.
+**Mistério das Giras** é um compêndio digital dedicado às Pombagiras da Umbanda e Quimbanda. Um espaço onde o conhecimento ancestral encontra a tecnologia moderna, preservando o respeito pelas entidades e suas tradições.
 
 ## 🃏 O que Encontrará Aqui
 
